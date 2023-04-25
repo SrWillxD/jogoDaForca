@@ -1,0 +1,40 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25vh;
+
+}
+
+#divContainerMain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    background-color: darkgreen;
+    
+
+    flex-direction: column;
+
+    
+}
+
+#divDica{
+    display: flex;
+    background-color: blue;
+}
+
+#divImagem{
+    display: flex;
+    background-color: aqua;
+}
+
+#divPalavraSecreta{
+    display: flex;
+    background-color: brown;
+}
+
+#divTeclado{
+    display: flex;
+    background-color: chartreuse;
+}
