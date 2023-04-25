@@ -12,7 +12,7 @@ body{
     align-items: center;
     height: 50vh;
     background-color: darkgreen;
-    
+
 
     flex-direction: column;
 
@@ -36,5 +36,26 @@ body{
 
 #divTeclado{
     display: flex;
+    flex-direction: column;
     background-color: chartreuse;
+}
+
+#linha1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#linha2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#linha3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
