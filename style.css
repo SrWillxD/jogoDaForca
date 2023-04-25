@@ -2,7 +2,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 25vh;
+    margin-top: 15vh;
 
 }
 
@@ -10,8 +10,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh;
-    background-color: darkgreen;
+    height: 70vh;
 
 
     flex-direction: column;
@@ -21,41 +20,50 @@ body{
 
 #divDica{
     display: flex;
-    background-color: blue;
+    font-size: 30px;
+    margin-bottom: 10px;
 }
 
 #divImagem{
     display: flex;
-    background-color: aqua;
+
 }
 
 #divPalavraSecreta{
     display: flex;
-    background-color: brown;
+    justify-content: center;
+    align-items: center;
 }
 
 #divTeclado{
     display: flex;
     flex-direction: column;
-    background-color: chartreuse;
+    margin-top: 30px;
+    gap: 10px;
+
 }
 
 #linha1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 15px;
 }
 
 #linha2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    gap: 15px;
 }
 
 #linha3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    gap: 15px;
+}
+
+#linha1 button, #linha2 button, #linha3 button {
+    font-size: 34px;
 }
