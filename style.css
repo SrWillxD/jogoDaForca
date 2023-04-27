@@ -73,4 +73,9 @@ body{
 .btn-acerto {
     background-color: green;
     color: white;
-  }
+}
+
+.btn-erro {
+    background-color: red;
+    color: white;
+}
