@@ -69,3 +69,8 @@ body{
 #linha1 button, #linha2 button, #linha3 button {
     font-size: 34px;
 }
+
+.btn-acerto {
+    background-color: green;
+    color: white;
+  }
