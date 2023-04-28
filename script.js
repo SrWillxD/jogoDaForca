@@ -87,7 +87,7 @@ function errou(eventDoClique){
     let divImagem = document.getElementById('imagemForca');
     if(numeroDaForca<6){numeroDaForca++}
 
-    divImagem.src = `../assets/img/imgsForca/forca${numeroDaForca}.png`;
+    divImagem.src = `assets/img/imgsForca/forca${numeroDaForca}.png`;
 
     coloreBotaoErro(eventDoClique);
     piscaTelaVermelho();
