@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da forca</title>
-
+    <link rel="shortcut icon" href="/assets/img/favicon-96x96.png">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -16,11 +16,10 @@
         </div>
 
         <div id="divImagem">
-            <img id="imagemForca" src="assets/img/imgsForca/forca0.png">
+            <img id="imagemForca" src="../assets/img/imgsForca/forca0.png">
         </div>
 
         <div id="divPalavraSecreta">
-            
         </div>
 
         <div id="divTeclado">
@@ -46,6 +45,7 @@
                 <button value="J">J</button>
                 <button value="K">K</button>
                 <button value="L">L</button>
+                <button value="Ç">Ç</button>
             </div>
             <div id="linha3">
                 <button value="Z">Z</button>
@@ -57,6 +57,15 @@
                 <button value="M">M</button>
             </div>
         </div>
+    </div>
+    <div class="overlay"></div>
+    <div class="notificationGanhou hidden">
+        <p>Você acertou a palavra com sucesso</p>
+        <button class="reiniciarJogo">Jogar Novamente</button>
+    </div>
+    <div class="notificationPerdeu hidden">
+        <p>A palavra era, você errou</p>
+        <button class="reiniciarJogo">Jogar Novamente</button>
     </div>
 </body>
 <script src="script.js"></script>
