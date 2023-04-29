@@ -76,10 +76,8 @@ body{
 
 .overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     display: none;
@@ -120,4 +118,53 @@ body{
     margin-top: 5px;
     font-size: 30px;
     border-radius: 10px;
+}
+
+@media (max-width: 532px) {
+    body {
+        transform: scale(0.95);
+        
+    }
+}
+
+@media (max-width: 507px) {
+    body {
+        transform: scale(0.90);
+        
+    }
+}
+
+@media (max-width: 471px) {
+    body {
+        transform: scale(0.85);
+        
+    }
+}
+
+@media (max-width: 447px) {
+    body {
+        transform: scale(0.80);
+        
+    }
+}
+
+@media (max-width: 418px) {
+    body {
+        transform: scale(0.75);
+        
+    }
+}
+
+@media (max-width: 394px) {
+    body {
+        transform: scale(0.70);
+        
+    }
+}
+
+@media (max-width: 374px) {
+    body {
+        transform: scale(0.65);
+        
+    }
 }
