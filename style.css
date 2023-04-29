@@ -82,6 +82,7 @@ body{
     backdrop-filter: blur(10px);
     display: none;
     z-index: 9998;
+    transform: scale(1.0);
 }
 
 .notificationGanhou {
@@ -120,51 +121,66 @@ body{
     border-radius: 10px;
 }
 
+
 @media (max-width: 532px) {
     body {
         transform: scale(0.95);
-        
+    }
+    .overlay {
+        transform: scale(1.05);
     }
 }
 
 @media (max-width: 507px) {
     body {
         transform: scale(0.90);
-        
+    }
+    .overlay {
+        transform: scale(1.111);
     }
 }
 
 @media (max-width: 471px) {
     body {
         transform: scale(0.85);
-        
+    }
+    .overlay {
+        transform: scale(1.176);
     }
 }
 
 @media (max-width: 447px) {
     body {
         transform: scale(0.80);
-        
+    }
+    .overlay {
+        transform: scale(1.25);
     }
 }
 
 @media (max-width: 418px) {
     body {
         transform: scale(0.75);
-        
+    }
+    .overlay {
+        transform: scale(1.333);
     }
 }
 
 @media (max-width: 394px) {
     body {
         transform: scale(0.70);
-        
+    }
+    .overlay {
+        transform: scale(1.428);
     }
 }
 
 @media (max-width: 374px) {
     body {
         transform: scale(0.65);
-        
+    }
+    .overlay {
+        transform: scale(1.538);
     }
 }
