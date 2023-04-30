@@ -1,33 +1,35 @@
-const palavras = {
-    Animais: ['ALBATROZ',  'ALPACA',  'ANCHOVA',  'BACALHAU',  'BADEJO',  'BARRACUDA',  'BELUGA',  'CHINCHILA',  'CRACA',  'ESCARAVELHO',  'GERBO',  'GNU',  'GRALHA',  'HAMSTER',  'LHAMA',  'LINCE',  'MARRECO',  'MELRO',  'OCAPI',  'PELICANO',  'PERCEVEJO',  'PIRILAMPO',  'QUATI',  'ROUXINOL',  'SANGUESSUGA',  'SURUCUCU',  'TAPIR',  'TEXUGO'],
-    Objetos: ["AMPULHETA",  "ANZOL",  "ALMOFARIZ",  "BOTIJA",  "CANDELABRO",  "DEDALEIRA",  "DESFIBRILADOR",  "ECHARPE",  "ESTRIBO",  "FAGOTE",  "FANTOCHE",  "FREEZER",  "NAVALHA",  "JALECO",  "MODEM",  "NEBULIZADOR",  "NOVELO",  "QUEPE",  "SELIM",  "SINTETIZADOR",  "SPRAY",  "URINOL",  "VUVUZELA",  "WEBCAM",  "XADREZ",  "XILOFONE"],
-    Frutas: ["ALFARROBA", "BERGAMOTA", "CIRIGUELA", "CRANBERRY", "FEIJOA", "GROSELHA", "IMBU", "JENIPAPO", "KIWI", "LICHIA", "MEXERICA", "NECTARINA", "PEQUI", "PISTACHE", "POMELO", "SAGUARAJI"],
-    Vulcões: ["LAVA", "QUENTE", "CINZA", "ROCHA", "CALOR", "DERRETIMENTO"], 
-    Cozinha: ["PANELAS", "COLHER", "RALADOR", "FRITADEIRA", "ELETRODOMESTICOS", "DEPURADOR", "CHAIRA", "TALHER",],
-    Profissões: ["APICULTOR",    "AUDITOR",    "BARTENDER",    "CERIMONIALISTA", "CHEF",    "COACH",    "DESEMBARGADOR",    "DESPACHANTE",    "ENDOCRINOLOGISTA",    "EMBAIXADOR",    "HEADHUNTER",    "JUIZ",    "PIZZAIOLO",    "PERITO",    "QUIROPRATA",    "ROTEIRIZADOR",    "SILVICULTOR",    "TRADER"],
-    Jardim: ["FLORES", "MINHOCA", "VASO", "TERRA", "PEDRA", "GRAMA", "FONTE"],
-    País: ["BRASIL", "ALEMANHA", "CHINA", "PORTUGAL", "CUBA", "NEPAL", "SURINAME", "UGANDA", "NORUEGA", "IRAQUE", "BOTSWANA"],
-    Escola: ["LIVRO", "CANETA", "BORRACHA", "CADEIRA", "CADERNO", "QUADRO", "GIZ", "PROVA", "APAGADOR", "MATERIAL", "DISCIPLINA", "ENSINO", "ALUNO", "PROFESSOR", "CURSO", "AULA", "NOTA", "APRENDIZADO"],
-    Prédio: ['ELEVADOR', 'PORTARIA', 'GARAGEM', 'ESCADARIA', 'JANELA', 'VARANDA', 'ANDAR', 'TELHADO', 'CIMENTO', 'BLOCOS', 'CATAVENTO', 'ESTRUTURA', 'REVESTIMENTO', 'APARTAMENTO', 'CIMENTEIRA'],
-    Árvore: ["FOLHA", "RAMO", "TRONCO", "RAIZ", "FRUTO", "SEMENTE", "GALHO", "FLORESTA", "FLORESCER", "JARDIM", "AROEIRA", "JABUTICABEIRA", "CEREJEIRA", "MANGUEIRA", "LARANJEIRA", "CAJUEIRO", "PINHEIRO"],
-    Filme: ['CINEMA', 'DIRETOR', 'ROTEIRISTA', 'FIGURINO', 'TRILHA', 'EFEITOS', 'FESTIVAL', 'TAPETE', 'HOLLYWOOD', 'CINEASTA', 'BILHETERIA', 'OSCAR'], 
+import {objetoDePalavras} from './objetoDePalavras.js';
+
+let palavraASerAdivinhada="";
+
+function iniciaOJogo(){
+    const grupoDaPalavra = defineGrupoDaPalavra();
+    dicaDaPalavra(grupoDaPalavra);
+    palavraASerAdivinhada = definePalavraDoGrupo(grupoDaPalavra);
+    tracinhosQueEscondemAPalavra(palavraASerAdivinhada);
+
+}
+iniciaOJogo();
+
+function defineGrupoDaPalavra(){
+    const grupo = Object.keys(objetoDePalavras)[Math.floor(Math.random() * Object.keys(objetoDePalavras).length)];
+    return grupo;
 }
 
-let palavra="";
-let underscore="";
+function definePalavraDoGrupo(grupo){
+    const palavraASerAdivinhada = objetoDePalavras[grupo][Math.floor(Math.random() * objetoDePalavras[grupo].length)];
+    return palavraASerAdivinhada;
+}
 
-init();
+function dicaDaPalavra(grupoDaPalavra){
+    const pDaDivDica = document.getElementById("pDaDivDica");
+    pDaDivDica.textContent = `A dica da palavra é: ${grupoDaPalavra}`;
+}
 
-
-function init(){
-    const valoresDasChavesDoObjeto = Object.keys(palavras);
-    const grupo = valoresDasChavesDoObjeto[Math.floor(Math.random() * valoresDasChavesDoObjeto.length)];
-    palavra = palavras[grupo][Math.floor(Math.random() * palavras[grupo].length)];
-
-    document.getElementById("pDaDivDica").textContent = `A dica da palavra é: ${grupo}`;
-
-    underscore = palavra.replace(/\S/g, "— ");
-    document.getElementById("divPalavraSecreta").textContent = underscore;
+function tracinhosQueEscondemAPalavra(palavraASerAdivinhada){
+    const tracinhosQueEscondemAPalavra = palavraASerAdivinhada.replace(/\S/g, "— ");
+    const divPalavraSecreta = document.getElementById("divPalavraSecreta");
+    divPalavraSecreta.textContent = tracinhosQueEscondemAPalavra;
 }
 
 const divTeclado = document.getElementById('divTeclado');
@@ -37,20 +39,20 @@ divTeclado.addEventListener('click', function(event){
     if (event.target.nodeName === 'BUTTON'){
     teclaPressionada = event.target.value;
     let eventDoClique = event;
-    verificaCertoErrado(teclaPressionada, palavra, eventDoClique);
+    verificaCertoErrado(teclaPressionada, palavraASerAdivinhada, eventDoClique);
     }
 });
 
-function verificaCertoErrado(teclaPressionada, palavra, eventDoClique){
-    if(palavra.includes(teclaPressionada)){
-        acertou(teclaPressionada, palavra, eventDoClique);
+function verificaCertoErrado(teclaPressionada, palavraASerAdivinhada, eventDoClique){
+    if(palavraASerAdivinhada.includes(teclaPressionada)){
+        acertou(teclaPressionada, palavraASerAdivinhada, eventDoClique);
     }else{
         errou(eventDoClique);
     }
 }
 
-function acertou(teclaPressionada, palavra, eventDoClique){
-    let novaPalavraSecreta = palavra.replace(/\s/g, ""); 
+function acertou(teclaPressionada, palavraASerAdivinhada, eventDoClique){
+    let novaPalavraSecreta = palavraASerAdivinhada.replace(/\s/g, ""); 
     let novaPalavra = document.getElementById("divPalavraSecreta").textContent;
     console.log(novaPalavra);
 
@@ -106,7 +108,7 @@ function piscaTelaVermelho(){
 function exibirNotificacaoPerdeu(){
     let overlay = document.querySelector('.overlay');
     let notificacao = document.querySelector('.notificationPerdeu');
-    notificacao.querySelector("p").textContent= `A palavra era: ${palavra}. Você errou.`;
+    notificacao.querySelector("p").textContent= `A palavra era: ${palavraASerAdivinhada}. Você errou.`;
     overlay.style.display = 'block';
     notificacao.style.display = 'block';
 }
