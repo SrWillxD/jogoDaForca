@@ -32,40 +32,50 @@ function tracinhosQueEscondemAPalavra(palavraASerAdivinhada){
     divPalavraSecreta.textContent = tracinhosQueEscondemAPalavra;
 }
 
-const divTeclado = document.getElementById('divTeclado');
+//!:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//TODO :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//* :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-let teclaPressionada = '';
-divTeclado.addEventListener('click', function(event){
+let valorDaTeclaPressionada = '';
+
+const divTeclado = document.getElementById('divTeclado');
+divTeclado.addEventListener('click', (event)=>{
     if (event.target.nodeName === 'BUTTON'){
-    teclaPressionada = event.target.value;
+    valorDaTeclaPressionada = event.target.value;
     let eventDoClique = event;
-    verificaCertoErrado(teclaPressionada, palavraASerAdivinhada, eventDoClique);
+    verificaCertoErrado(eventDoClique);
     }
 });
 
-function verificaCertoErrado(teclaPressionada, palavraASerAdivinhada, eventDoClique){
-    if(palavraASerAdivinhada.includes(teclaPressionada)){
-        acertou(teclaPressionada, palavraASerAdivinhada, eventDoClique);
+function verificaCertoErrado(eventDoClique){
+    console.log(`valorDaTeclaPressionada => ${valorDaTeclaPressionada}`);
+    console.log(`palavraASerAdivinhada =>${palavraASerAdivinhada}`);
+    console.log(eventDoClique);
+    if(palavraASerAdivinhada.includes(valorDaTeclaPressionada)){
+        acertou(valorDaTeclaPressionada, palavraASerAdivinhada, eventDoClique);
     }else{
         errou(eventDoClique);
     }
 }
 
-function acertou(teclaPressionada, palavraASerAdivinhada, eventDoClique){
-    let novaPalavraSecreta = palavraASerAdivinhada.replace(/\s/g, ""); 
-    let novaPalavra = document.getElementById("divPalavraSecreta").textContent;
-    console.log(novaPalavra);
+function acertou(valorDaTeclaPressionada, palavraASerAdivinhada, eventDoClique){
+    //! Retira o espaços da palavaASerAdivinhada
+    let palavraASerAdivinhadaSemEspaços = palavraASerAdivinhada.replace(/\s/g, ""); 
 
-    for (let i = 0; i < novaPalavraSecreta.length; i++){
-        if (novaPalavraSecreta[i] == teclaPressionada) {
-            novaPalavra = novaPalavra.substring(0, 2 * i) + teclaPressionada + novaPalavra.substring(2 * i + 1);
+    //! Pega a palavra atualizada do HTML
+    let palavraAtualizadaACadaTeclagem = document.getElementById("divPalavraSecreta").textContent;
+
+
+    for (let i = 0; i < palavraASerAdivinhadaSemEspaços.length; i++){
+        if (palavraASerAdivinhadaSemEspaços[i] == valorDaTeclaPressionada) {
+            palavraAtualizadaACadaTeclagem = palavraAtualizadaACadaTeclagem.substring(0, 2 * i) + valorDaTeclaPressionada + palavraAtualizadaACadaTeclagem.substring(2 * i + 1);
         }
     }
     
-    document.getElementById("divPalavraSecreta").textContent = novaPalavra;
+    document.getElementById("divPalavraSecreta").textContent = palavraAtualizadaACadaTeclagem;
     coloreBotaoAcerto(eventDoClique);
     piscaTelaVerde();
-    if(!novaPalavra.includes("— ")){setTimeout(()=> {exibirNotificacaoGanhou()}, 600)}
+    if(!palavraAtualizadaACadaTeclagem.includes("— ")){setTimeout(()=> {exibirNotificacaoGanhou()}, 600)}
 }
 
 function coloreBotaoAcerto(eventDoClique){
