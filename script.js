@@ -33,10 +33,6 @@ function tracinhosQueEscondemAPalavra(palavraASerAdivinhada){
     divPalavraSecreta.textContent = tracinhosQueEscondemAPalavra;
 }
 
-//!:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-//TODO :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-//* :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 let valorDaTeclaPressionada = '';
 
 const divTeclado = document.getElementById('divTeclado');
@@ -88,6 +84,9 @@ function piscaTelaVerde(){
     setTimeout(()=>{document.body.style.backgroundColor = "grey"},200);
 }
 
+let overlay = document.querySelector('.overlay');
+let notificacao = document.querySelector('.notificationGanhou');
+
 function verificaSeGanhou(palavraAtualizadaACadaTeclagem){
     if(!palavraAtualizadaACadaTeclagem.includes("— ")){
         setTimeout(()=> {exibirNotificacaoGanhou()}, 600)
@@ -96,8 +95,6 @@ function verificaSeGanhou(palavraAtualizadaACadaTeclagem){
 }
 
 function exibirNotificacaoGanhou(){
-    let overlay = document.querySelector('.overlay');
-    let notificacao = document.querySelector('.notificationGanhou');
     overlay.style.display = 'block';
     notificacao.style.display = 'block';
 }
@@ -124,8 +121,6 @@ function piscaTelaVermelho(){
 }
 
 function exibirNotificacaoPerdeu(){
-    let overlay = document.querySelector('.overlay');
-    let notificacao = document.querySelector('.notificationPerdeu');
     notificacao.querySelector("p").textContent= `A palavra era: ${palavraASerAdivinhada}. Você errou.`;
     overlay.style.display = 'block';
     notificacao.style.display = 'block';
