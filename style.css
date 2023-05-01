@@ -14,17 +14,17 @@ body{
     flex-direction: column;
 }
 
-#divDica{
+#divTip{
     display: flex;
     font-size: 30px;
     margin-bottom: 10px;
 }
 
-#divImagem{
+#divImg{
     display: flex;
 }
 
-#divPalavraSecreta{
+#divSecretWord{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,44 +32,44 @@ body{
     font-size: 40px;
 }
 
-#divTeclado{
+#divKeyboard{
     display: flex;
     flex-direction: column;
     margin-top: 30px;
     gap: 10px;
 }
 
-#linha1 {
+#line1 {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
 }
 
-#linha2 {
+#line2 {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
 }
 
-#linha3 {
+#line3 {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
 }
 
-#linha1 button, #linha2 button, #linha3 button {
+#line1 button, #line2 button, #line3 button {
     font-size: 34px;
 }
 
-.btn-acerto {
+.rightButton {
     background-color: green;
     color: white;
 }
 
-.btn-erro {
+.wrongButton {
     background-color: red;
     color: white;
 }
@@ -85,7 +85,7 @@ body{
     transform: scale(1.0);
 }
 
-.notificationGanhou {
+.notification {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -100,27 +100,11 @@ body{
     border-radius: 5px;
 }
 
-.notificationPerdeu {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    height: 10vh;
-    width: 62vh;
-    transform: translate(-50%, -50%);
-    font-size: 30px;
-    z-index: 9999;
-    display: none;
-    align-items: center;
-    text-align: center;
-    border-radius: 5px;
-}
-
-.reiniciarJogo{
+.restartGame{
     margin-top: 5px;
     font-size: 30px;
     border-radius: 10px;
 }
-
 
 @media (max-width: 532px) {
     body {

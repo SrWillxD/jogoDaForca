@@ -11,19 +11,18 @@
 </head>
 <body>
     <div id="divContainerMain">
-        <div id="divDica">
-            <p id="pDaDivDica"></p>
+        <div id="divTip">
+            <p id="pFromDivTip"></p>
         </div>
 
-        <div id="divImagem">
-            <img id="imagemForca" src="assets/img/imgsForca/forca0.png">
+        <div id="divImg">
+            <img id="gallowsImg" src="assets/img/imgsForca/forca0.png">
         </div>
 
-        <div id="divPalavraSecreta">
-        </div>
+        <div id="divSecretWord"></div>
 
-        <div id="divTeclado">
-            <div id="linha1">
+        <div id="divKeyboard">
+            <div id="line1">
                 <button value="Q">Q</button>
                 <button value="W">W</button>
                 <button value="E">E</button>
@@ -35,7 +34,7 @@
                 <button value="O">O</button>
                 <button value="P">P</button>
             </div>
-            <div id="linha2">
+            <div id="line2">
                 <button value="A">A</button>
                 <button value="S">S</button>
                 <button value="D">D</button>
@@ -47,7 +46,7 @@
                 <button value="L">L</button>
                 <button value="Ç">Ç</button>
             </div>
-            <div id="linha3">
+            <div id="line3">
                 <button value="Z">Z</button>
                 <button value="X">X</button>
                 <button value="C">C</button>
@@ -59,13 +58,13 @@
         </div>
     </div>
     <div class="overlay"></div>
-    <div class="notificationGanhou hidden">
+    <div class="notification hidden">
         <p>Você acertou a palavra com sucesso.</p>
-        <button class="reiniciarJogo">Jogar Novamente</button>
+        <button class="restartGame">Jogar Novamente</button>
     </div>
-    <div class="notificationPerdeu hidden">
+    <div class="notification hidden">
         <p>A palavra era, você errou</p>
-        <button class="reiniciarJogo">Jogar Novamente</button>
+        <button class="restartGame">Jogar Novamente</button>
     </div>
 </body>
 <script type="module" src="script.js"></script>

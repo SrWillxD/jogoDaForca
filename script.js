@@ -1,145 +1,143 @@
-import {objetoDePalavras} from './objetoDePalavras.js';
+import {wordObject} from './wordObject.js';
 
-let palavraASerAdivinhada="";
+let wordToBeGuessed="";
 
-const divPalavraSecreta = document.getElementById("divPalavraSecreta");
+const divSecretWord = document.getElementById("divSecretWord");
 
-function iniciaOJogo(){
-    const grupoDaPalavra = defineGrupoDaPalavra();
-    dicaDaPalavra(grupoDaPalavra);
-    palavraASerAdivinhada = definePalavraDoGrupo(grupoDaPalavra);
-    tracinhosQueEscondemAPalavra(palavraASerAdivinhada); 
-
+function startTheGame(){
+    const wordGroup = defineWordGroup();
+    tipOfWord(wordGroup);
+    wordToBeGuessed = defineGroupWord(wordGroup);
+    dashesThatHideTheWord(wordToBeGuessed); 
 }
-iniciaOJogo();
+startTheGame();
 
-function defineGrupoDaPalavra(){
-    const grupo = Object.keys(objetoDePalavras)[Math.floor(Math.random() * Object.keys(objetoDePalavras).length)];
-    return grupo;
-}
-
-function definePalavraDoGrupo(grupo){
-    const palavraASerAdivinhada = objetoDePalavras[grupo][Math.floor(Math.random() * objetoDePalavras[grupo].length)];
-    return palavraASerAdivinhada;
+function defineWordGroup(){
+    const group = Object.keys(wordObject)[Math.floor(Math.random() * Object.keys(wordObject).length)];
+    return group;
 }
 
-function dicaDaPalavra(grupoDaPalavra){
-    const pDaDivDica = document.getElementById("pDaDivDica");
-    pDaDivDica.textContent = `A dica da palavra é: ${grupoDaPalavra}`;
+function defineGroupWord(group){
+    const wordToBeGuessed = wordObject[group][Math.floor(Math.random() * wordObject[group].length)];
+    return wordToBeGuessed;
 }
 
-function tracinhosQueEscondemAPalavra(palavraASerAdivinhada){
-    const tracinhosQueEscondemAPalavra = palavraASerAdivinhada.replace(/\S/g, "— ");
-    divPalavraSecreta.textContent = tracinhosQueEscondemAPalavra;
+function tipOfWord(wordGroup){
+    const pFromDivTip = document.getElementById("pFromDivTip");
+    pFromDivTip.textContent = `A dica da palavra é: ${wordGroup}`;
 }
 
-let valorDaTeclaPressionada = '';
+function dashesThatHideTheWord(wordToBeGuessed){
+    const dashesThatHideTheWord = wordToBeGuessed.replace(/\S/g, "— ");
+    divSecretWord.textContent = dashesThatHideTheWord;
+}
 
-const divTeclado = document.getElementById('divTeclado');
-divTeclado.addEventListener('click', (event)=>{
+let keyPressedValue = '';
+
+const divKeyboard = document.getElementById('divKeyboard');
+divKeyboard.addEventListener('click', (event)=>{
     if (event.target.nodeName === 'BUTTON'){
-    valorDaTeclaPressionada = event.target.value;
-    let eventDoClique = event;
-    verificaCertoErrado(eventDoClique);
+    keyPressedValue = event.target.value;
+    let clickEvent = event;
+    checkIfContainsLetter(clickEvent);
     }
 });
 
-function verificaCertoErrado(eventDoClique){
-    if(palavraASerAdivinhada.includes(valorDaTeclaPressionada)){
-        acertou(eventDoClique);
+function checkIfContainsLetter(clickEvent){
+    if(wordToBeGuessed.includes(keyPressedValue)){
+        contains(clickEvent);
     }else{
-        errou(eventDoClique);
+        NotContains(clickEvent);
     }
 }
 
-function acertou(eventDoClique){
-    let palavraAtualizadaACadaTeclagem = atualizaAPalavraACadaTeclagem();
+function contains(clickEvent){
+    let wordUpdatedEveryKeystroke = UpdatesTheWordWithEveryKeystroke();
 
-    coloreBotaoDeVerde(eventDoClique);
-    piscaTelaVerde();
-    verificaSeGanhou(palavraAtualizadaACadaTeclagem);
+    colorTheButtonGreen(clickEvent);
+    flashGreenScreen();
+    checkIfWon(wordUpdatedEveryKeystroke);
 }
 
-function atualizaAPalavraACadaTeclagem(){
-    let palavraASerAdivinhadaSemEspaços = palavraASerAdivinhada.replace(/\s/g, ""); 
-    let palavraAtualizadaACadaTeclagem = divPalavraSecreta.textContent;
-    console.log(palavraASerAdivinhada);
+function UpdatesTheWordWithEveryKeystroke(){
+    let wordToBeGuessedWithoutSpaces = wordToBeGuessed.replace(/\s/g, ""); 
+    let wordUpdatedEveryKeystroke = divSecretWord.textContent;
     
-    for (let i = 0; i < palavraASerAdivinhadaSemEspaços.length; i++){
-        if(palavraASerAdivinhadaSemEspaços[i] == valorDaTeclaPressionada) {
-            palavraAtualizadaACadaTeclagem = palavraAtualizadaACadaTeclagem.substring(0, 2 * i) + valorDaTeclaPressionada + palavraAtualizadaACadaTeclagem.substring(2 * i + 1);
+    for (let i = 0; i < wordToBeGuessedWithoutSpaces.length; i++){
+        if(wordToBeGuessedWithoutSpaces[i] == keyPressedValue) {
+            wordUpdatedEveryKeystroke = wordUpdatedEveryKeystroke.substring(0, 2 * i) + keyPressedValue + wordUpdatedEveryKeystroke.substring(2 * i + 1);
         }
     }
     
-    divPalavraSecreta.textContent = palavraAtualizadaACadaTeclagem;
-    return palavraAtualizadaACadaTeclagem;
+    divSecretWord.textContent = wordUpdatedEveryKeystroke;
+    return wordUpdatedEveryKeystroke;
 }
 
-function coloreBotaoDeVerde(eventDoClique){
-    eventDoClique.target.classList.add('btn-acerto');
+function colorTheButtonGreen(clickEvent){
+    clickEvent.target.classList.add('rightButton');
 }
 
-function piscaTelaVerde(){
+function flashGreenScreen(){
     setTimeout(()=>{document.body.style.backgroundColor = "rgba(62, 255, 62, 0.500)"},1);
     setTimeout(()=>{document.body.style.backgroundColor = "grey"},200);
 }
 
 let overlay = document.querySelector('.overlay');
-let notificacao = document.querySelector('.notificationGanhou');
+let notification = document.querySelector('.notification');
 
-function verificaSeGanhou(palavraAtualizadaACadaTeclagem){
-    if(!palavraAtualizadaACadaTeclagem.includes("— ")){
-        setTimeout(()=> {exibirNotificacaoGanhou()}, 600);
+function checkIfWon(wordUpdatedEveryKeystroke){
+    if(!wordUpdatedEveryKeystroke.includes("— ")){
+        setTimeout(()=> {displayNotificationWon()}, 600);
     }
     
 }
 
-function exibirNotificacaoGanhou(){
+function displayNotificationWon(){
     overlay.style.display = 'block';
-    notificacao.style.display = 'block';
+    notification.style.display = 'block';
 }
 
-let numeroDaForca=0;
-function errou(eventDoClique){ //* ><<<<<<>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<««««»»»»»»«««««»»«««««»»»««««»»»
-    if(numeroDaForca<6){
-        numeroDaForca++
+let gallowsNumber=0;
+function NotContains(clickEvent){
+    if(gallowsNumber<6){
+        gallowsNumber++
     }
     
-    atualizaFotoForca();
-    coloreBotaoDeVermelho(eventDoClique);
-    piscaTelaVermelho();
-    verificaSePerdeu();
+    updateGallowsPhoto();
+    colorTheButtonRed(clickEvent);
+    flashGreenRed();
+    checkIfLost();
 }
 
-function atualizaFotoForca(){
-    let divImagem = document.getElementById('imagemForca');
-    divImagem.src = `./assets/img/imgsForca/forca${numeroDaForca}.png`;
+function updateGallowsPhoto(){
+    let divImg = document.getElementById('gallowsImg');
+    divImg.src = `./assets/img/imgsForca/forca${gallowsNumber}.png`;
 }
 
-function coloreBotaoDeVermelho(eventDoClique){
-    eventDoClique.target.classList.add('btn-erro');
+function colorTheButtonRed(clickEvent){
+    clickEvent.target.classList.add('wrongButton');
 }
 
-function piscaTelaVermelho(){
+function flashGreenRed(){
     setTimeout(()=>{document.body.style.backgroundColor = "rgba(255, 0, 0, 0.300)"},1);
     setTimeout(()=>{document.body.style.backgroundColor = "grey"},200);
 }
 
-function verificaSePerdeu(){
-    if(numeroDaForca==6){
-        setTimeout(()=> {exibirNotificacaoPerdeu()}, 500);
+function checkIfLost(){
+    if(gallowsNumber==6){
+        setTimeout(()=> {displayNotificationLost()}, 500);
     }
 }
 
-function exibirNotificacaoPerdeu(){
-    notificacao.querySelector("p").textContent= `A palavra era: ${palavraASerAdivinhada}. Você errou.`;
+function displayNotificationLost(){
+    notification.querySelector("p").textContent= `A palavra era: ${wordToBeGuessed}. Você errou.`;
     overlay.style.display = 'block';
-    notificacao.style.display = 'block';
+    notification.style.display = 'block';
 }
 
-const reiniciarJogoBotao = document.querySelectorAll(".reiniciarJogo");
-for (let i = 0; i < reiniciarJogoBotao.length; i++){
-    reiniciarJogoBotao[i].addEventListener("click", ()=>{
+const resetGameButton = document.querySelectorAll(".restartGame");
+for (let i = 0; i < resetGameButton.length; i++){
+    resetGameButton[i].addEventListener("click", ()=>{
     location.reload();
     });
 }
