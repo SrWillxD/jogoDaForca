@@ -55,7 +55,7 @@ function verificaCertoErrado(eventDoClique){
 function acertou(eventDoClique){
     let palavraAtualizadaACadaTeclagem = atualizaAPalavraACadaTeclagem();
 
-    coloreBotaoAcerto(eventDoClique);
+    coloreBotaoDeVerde(eventDoClique);
     piscaTelaVerde();
     verificaSeGanhou(palavraAtualizadaACadaTeclagem);
 }
@@ -75,7 +75,7 @@ function atualizaAPalavraACadaTeclagem(){
     return palavraAtualizadaACadaTeclagem;
 }
 
-function coloreBotaoAcerto(eventDoClique){
+function coloreBotaoDeVerde(eventDoClique){
     eventDoClique.target.classList.add('btn-acerto');
 }
 
@@ -89,7 +89,7 @@ let notificacao = document.querySelector('.notificationGanhou');
 
 function verificaSeGanhou(palavraAtualizadaACadaTeclagem){
     if(!palavraAtualizadaACadaTeclagem.includes("— ")){
-        setTimeout(()=> {exibirNotificacaoGanhou()}, 600)
+        setTimeout(()=> {exibirNotificacaoGanhou()}, 600);
     }
     
 }
@@ -100,24 +100,35 @@ function exibirNotificacaoGanhou(){
 }
 
 let numeroDaForca=0;
-function errou(eventDoClique){
-    let divImagem = document.getElementById('imagemForca');
-    if(numeroDaForca<6){numeroDaForca++}
-
-    divImagem.src = `./assets/img/imgsForca/forca${numeroDaForca}.png`;
-
-    coloreBotaoErro(eventDoClique);
+function errou(eventDoClique){ //* ><<<<<<>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<««««»»»»»»«««««»»«««««»»»««««»»»
+    if(numeroDaForca<6){
+        numeroDaForca++
+    }
+    
+    atualizaFotoForca();
+    coloreBotaoDeVermelho(eventDoClique);
     piscaTelaVermelho();
-    if(numeroDaForca==6){setTimeout(()=> {exibirNotificacaoPerdeu()}, 500)}
+    verificaSePerdeu();
 }
 
-function coloreBotaoErro(eventDoClique){
+function atualizaFotoForca(){
+    let divImagem = document.getElementById('imagemForca');
+    divImagem.src = `./assets/img/imgsForca/forca${numeroDaForca}.png`;
+}
+
+function coloreBotaoDeVermelho(eventDoClique){
     eventDoClique.target.classList.add('btn-erro');
 }
 
 function piscaTelaVermelho(){
     setTimeout(()=>{document.body.style.backgroundColor = "rgba(255, 0, 0, 0.300)"},1);
     setTimeout(()=>{document.body.style.backgroundColor = "grey"},200);
+}
+
+function verificaSePerdeu(){
+    if(numeroDaForca==6){
+        setTimeout(()=> {exibirNotificacaoPerdeu()}, 500);
+    }
 }
 
 function exibirNotificacaoPerdeu(){
@@ -127,8 +138,8 @@ function exibirNotificacaoPerdeu(){
 }
 
 const reiniciarJogoBotao = document.querySelectorAll(".reiniciarJogo");
-for (let i = 0; i < reiniciarJogoBotao.length; i++) {
-    reiniciarJogoBotao[i].addEventListener("click", function() {
+for (let i = 0; i < reiniciarJogoBotao.length; i++){
+    reiniciarJogoBotao[i].addEventListener("click", ()=>{
     location.reload();
     });
 }
