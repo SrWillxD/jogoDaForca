@@ -2,11 +2,13 @@ import {objetoDePalavras} from './objetoDePalavras.js';
 
 let palavraASerAdivinhada="";
 
+const divPalavraSecreta = document.getElementById("divPalavraSecreta");
+
 function iniciaOJogo(){
     const grupoDaPalavra = defineGrupoDaPalavra();
     dicaDaPalavra(grupoDaPalavra);
     palavraASerAdivinhada = definePalavraDoGrupo(grupoDaPalavra);
-    tracinhosQueEscondemAPalavra(palavraASerAdivinhada);
+    tracinhosQueEscondemAPalavra(palavraASerAdivinhada); 
 
 }
 iniciaOJogo();
@@ -28,7 +30,6 @@ function dicaDaPalavra(grupoDaPalavra){
 
 function tracinhosQueEscondemAPalavra(palavraASerAdivinhada){
     const tracinhosQueEscondemAPalavra = palavraASerAdivinhada.replace(/\S/g, "— ");
-    const divPalavraSecreta = document.getElementById("divPalavraSecreta");
     divPalavraSecreta.textContent = tracinhosQueEscondemAPalavra;
 }
 
@@ -48,34 +49,34 @@ divTeclado.addEventListener('click', (event)=>{
 });
 
 function verificaCertoErrado(eventDoClique){
-    console.log(`valorDaTeclaPressionada => ${valorDaTeclaPressionada}`);
-    console.log(`palavraASerAdivinhada =>${palavraASerAdivinhada}`);
-    console.log(eventDoClique);
     if(palavraASerAdivinhada.includes(valorDaTeclaPressionada)){
-        acertou(valorDaTeclaPressionada, palavraASerAdivinhada, eventDoClique);
+        acertou(eventDoClique);
     }else{
         errou(eventDoClique);
     }
 }
 
-function acertou(valorDaTeclaPressionada, palavraASerAdivinhada, eventDoClique){
-    //! Retira o espaços da palavaASerAdivinhada
+function acertou(eventDoClique){
+    let palavraAtualizadaACadaTeclagem = atualizaAPalavraACadaTeclagem();
+
+    coloreBotaoAcerto(eventDoClique);
+    piscaTelaVerde();
+    verificaSeGanhou(palavraAtualizadaACadaTeclagem);
+}
+
+function atualizaAPalavraACadaTeclagem(){
     let palavraASerAdivinhadaSemEspaços = palavraASerAdivinhada.replace(/\s/g, ""); 
-
-    //! Pega a palavra atualizada do HTML
-    let palavraAtualizadaACadaTeclagem = document.getElementById("divPalavraSecreta").textContent;
-
-
+    let palavraAtualizadaACadaTeclagem = divPalavraSecreta.textContent;
+    console.log(palavraASerAdivinhada);
+    
     for (let i = 0; i < palavraASerAdivinhadaSemEspaços.length; i++){
-        if (palavraASerAdivinhadaSemEspaços[i] == valorDaTeclaPressionada) {
+        if(palavraASerAdivinhadaSemEspaços[i] == valorDaTeclaPressionada) {
             palavraAtualizadaACadaTeclagem = palavraAtualizadaACadaTeclagem.substring(0, 2 * i) + valorDaTeclaPressionada + palavraAtualizadaACadaTeclagem.substring(2 * i + 1);
         }
     }
     
-    document.getElementById("divPalavraSecreta").textContent = palavraAtualizadaACadaTeclagem;
-    coloreBotaoAcerto(eventDoClique);
-    piscaTelaVerde();
-    if(!palavraAtualizadaACadaTeclagem.includes("— ")){setTimeout(()=> {exibirNotificacaoGanhou()}, 600)}
+    divPalavraSecreta.textContent = palavraAtualizadaACadaTeclagem;
+    return palavraAtualizadaACadaTeclagem;
 }
 
 function coloreBotaoAcerto(eventDoClique){
@@ -85,6 +86,13 @@ function coloreBotaoAcerto(eventDoClique){
 function piscaTelaVerde(){
     setTimeout(()=>{document.body.style.backgroundColor = "rgba(62, 255, 62, 0.500)"},1);
     setTimeout(()=>{document.body.style.backgroundColor = "grey"},200);
+}
+
+function verificaSeGanhou(palavraAtualizadaACadaTeclagem){
+    if(!palavraAtualizadaACadaTeclagem.includes("— ")){
+        setTimeout(()=> {exibirNotificacaoGanhou()}, 600)
+    }
+    
 }
 
 function exibirNotificacaoGanhou(){
