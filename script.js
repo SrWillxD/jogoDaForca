@@ -8,7 +8,6 @@ function startTheGame(){
     const wordGroup = defineWordGroup();
     tipOfWord(wordGroup);
     wordToBeGuessed = defineGroupWord(wordGroup);
-    console.log(wordToBeGuessed);//!Remover
     dashesThatHideTheWord(wordToBeGuessed);
 }
 

@@ -32,13 +32,13 @@ body{
     gap: 10px;
 }
 
-.linhasDoTeclado{
+.keyboardLines{
     display: flex;
     justify-content: center;
     gap: 15px;
 }
 
-.linhasDoTeclado button {
+.keyboardLines button {
     font-size: 34px;
 }
 
