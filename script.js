@@ -39,9 +39,12 @@ let keyPressedValue = '';
 const divKeyboard = document.getElementById('divKeyboard');
 
 divKeyboard.addEventListener('click', (event)=>{
-    keyPressedValue = event.target.value;
-    let clickEvent = event;
-    checkIfContainsLetter(clickEvent);
+    if(event.target.tagName === 'BUTTON'){
+        keyPressedValue = event.target.value;
+        let clickEvent = event;
+        checkIfContainsLetter(clickEvent);
+        
+    }
 });
 
 function checkIfContainsLetter(clickEvent){
